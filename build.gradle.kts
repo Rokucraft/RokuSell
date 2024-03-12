@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
-    id("xyz.jpenilla.run-paper") version "2.2.2"
+    id("xyz.jpenilla.run-paper") version "2.2.3"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
@@ -19,6 +19,7 @@ dependencies {
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
 
     implementation("org.incendo:cloud-paper:2.0.0-beta.1")
+    implementation("org.spongepowered:configurate-yaml:4.1.2")
 
     library("com.google.dagger:dagger:2.50")
     annotationProcessor("com.google.dagger:dagger-compiler:2.50")
@@ -52,9 +53,9 @@ tasks {
 
     runServer {
         minecraftVersion("1.19.4")
-        downloadPlugins {
-            github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
-            modrinth("essentialsx", "2.20.2")
+        plugins {
+//            github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
+//            modrinth("essentialsx", "2.20.2")
         }
     }
 }
