@@ -15,6 +15,7 @@ public abstract class RokuSellModule {
     }
 
     @Provides
+    @DataPath
     static Path provideDataPath(RokuSellPlugin plugin) {
         return plugin.getDataFolder().toPath();
     }
