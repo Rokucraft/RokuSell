@@ -11,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiConsumer;
 
+import static net.kyori.adventure.text.Component.text;
+
 public class SellInventory implements InventoryHolder {
 
     private final Inventory inventory;
@@ -20,7 +22,7 @@ public class SellInventory implements InventoryHolder {
     public SellInventory(ItemRepository itemRepository, BiConsumer<Player, Double> onSell) {
         this.itemRepository = itemRepository;
         this.onSell = onSell;
-        this.inventory = Bukkit.createInventory(this, 3 * 9);
+        this.inventory = Bukkit.createInventory(this, 3 * 9, text("Sell your items here!"));
     }
 
     @Override

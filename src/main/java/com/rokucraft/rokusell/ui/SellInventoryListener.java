@@ -22,5 +22,4 @@ public class SellInventoryListener implements Listener {
         }
         sellInventory.sellContents(player);
     }
-
 }
