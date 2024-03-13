@@ -18,11 +18,11 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
 
-    implementation("org.incendo:cloud-paper:2.0.0-beta.1")
+    implementation("org.incendo:cloud-paper:2.0.0-beta.5")
     implementation("org.spongepowered:configurate-yaml:4.1.2")
 
-    library("com.google.dagger:dagger:2.50")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.50")
+    library("com.google.dagger:dagger:2.51")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.51")
 }
 
 java {
