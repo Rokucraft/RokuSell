@@ -32,7 +32,7 @@ java {
 bukkit {
     name = rootProject.name
     version = project.version.toString()
-    main = "com.rokucraft.rokusell.RokuSell"
+    main = "com.rokucraft.rokusell.RokuSellPlugin"
     apiVersion = "1.19"
     author = "Aikovdp"
     website = "https://rokucraft.com"
@@ -53,9 +53,9 @@ tasks {
 
     runServer {
         minecraftVersion("1.19.4")
-        plugins {
-//            github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
-//            modrinth("essentialsx", "2.20.2")
+        downloadPlugins {
+            github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
+            modrinth("essentialsx", "2.20.1")
         }
     }
 }
