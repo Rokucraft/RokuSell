@@ -5,6 +5,8 @@ import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
 import javax.inject.Inject;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -14,8 +16,17 @@ public class ItemRepository {
 
     @Inject
     public ItemRepository(@DataPath Path dataPath) {
+        Path itemPath = dataPath.resolve("items.yml");
+        if (Files.notExists(itemPath)) {
+            try {
+                Files.createDirectories(itemPath.getParent());
+                Files.createFile(itemPath);
+            } catch (IOException e) {
+                throw new RuntimeException("Couldn't create items.yml", e);
+            }
+        }
         loader = YamlConfigurationLoader.builder()
-                .path(dataPath.resolve("items.yml"))
+                .path(itemPath)
                 .build();
     }
 
