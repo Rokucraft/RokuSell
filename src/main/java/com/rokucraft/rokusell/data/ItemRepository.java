@@ -1,7 +1,6 @@
 package com.rokucraft.rokusell.data;
 
 import com.rokucraft.rokusell.di.DataPath;
-import org.slf4j.Logger;
 import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 

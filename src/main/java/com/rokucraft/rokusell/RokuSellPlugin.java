@@ -13,6 +13,8 @@ public class RokuSellPlugin extends JavaPlugin {
                 .plugin(this)
                 .build();
 
+        component.listeners().forEach(l -> this.getServer().getPluginManager().registerEvents(l, this));
+
         CommandManager<CommandSender> commandManager = component.commandManager();
         component.commands().forEach(commandManager::command);
     }

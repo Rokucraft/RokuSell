@@ -9,18 +9,18 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 public class SellInventory implements InventoryHolder {
 
     private final Inventory inventory;
     private final ItemRepository itemRepository;
-    private final Consumer<Double> onSell;
+    private final BiConsumer<Player, Double> onSell;
 
-    public SellInventory(ItemRepository itemRepository, Player player, Consumer<Double> onSell) {
+    public SellInventory(ItemRepository itemRepository, BiConsumer<Player, Double> onSell) {
         this.itemRepository = itemRepository;
         this.onSell = onSell;
-        this.inventory = Bukkit.createInventory(this, 9);
+        this.inventory = Bukkit.createInventory(this, 3 * 9);
     }
 
     @Override
@@ -28,11 +28,22 @@ public class SellInventory implements InventoryHolder {
         return this.inventory;
     }
 
-    public void sellContents() {
-        onSell.accept(3.0);
+    public void sellContents(Player player) {
+        double totalWorth = 0;
+        for (ItemStack item : inventory) {
+            if (item == null) continue;
+            double worth = getWorth(item);
+            if (worth == 0) {
+                player.getInventory().addItem(item);
+                continue;
+            }
+            totalWorth += worth;
+        }
+
+        onSell.accept(player, totalWorth);
     }
 
-    public double getWorth(ItemStack itemStack) {
+    private double getWorth(ItemStack itemStack) {
         return itemRepository.getItems().stream()
                 .filter(i -> i.matches(itemStack))
                 .findFirst()

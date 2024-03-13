@@ -21,10 +21,10 @@ public class SellManager {
     }
 
     public void open(Player player) {
-        player.openInventory(createSellInventory(player).getInventory());
+        player.openInventory(createSellInventory().getInventory());
     }
 
-    private SellInventory createSellInventory(Player player) {
-        return new SellInventory(itemRepository, player, (amount) -> economy.depositPlayer(player, amount));
+    private SellInventory createSellInventory() {
+        return new SellInventory(itemRepository, economy::depositPlayer);
     }
 }
