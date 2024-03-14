@@ -41,7 +41,7 @@ public class SellInventory implements InventoryHolder {
             }
             totalWorth += worth;
         }
-
+        if (totalWorth == 0) return;
         onSell.accept(player, totalWorth);
     }
 
