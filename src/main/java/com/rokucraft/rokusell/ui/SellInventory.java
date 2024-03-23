@@ -36,7 +36,7 @@ public class SellInventory implements InventoryHolder {
             if (item == null) continue;
             double worth = getWorth(item);
             if (worth == 0) {
-                player.getInventory().addItem(item);
+                returnItem(player, item);
                 continue;
             }
             totalWorth += worth;
@@ -51,5 +51,12 @@ public class SellInventory implements InventoryHolder {
                 .findFirst()
                 .map(Item::worth)
                 .orElse(0.0) * itemStack.getAmount();
+    }
+
+    private void returnItem(Player player, ItemStack item) {
+        player.getInventory()
+                .addItem(item)
+                .values()
+                .forEach(remaining -> player.getWorld().dropItem(player.getLocation(), remaining));
     }
 }
