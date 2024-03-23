@@ -21,7 +21,7 @@ public class ReloadCommand extends RokuSellCommand {
     @Override
     protected Command.Builder<? extends CommandSender> configure(Command.Builder<CommandSender> builder) {
         return builder.literal("reload")
-                .permission("rokusell.reload")
+                .permission("rokusell.command.reload")
                 .handler(ctx -> {
                     itemRepository.refresh();
                     ctx.sender().sendMessage(text("Item configuration reloaded", NamedTextColor.GREEN));
