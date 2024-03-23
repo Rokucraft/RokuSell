@@ -9,8 +9,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.event.Listener;
 import org.incendo.cloud.CommandManager;
 
+import javax.inject.Singleton;
 import java.util.Set;
 
+@Singleton
 @Component(modules = {RokuSellModule.class, CommandsModule.class, VaultModule.class, InventoryUiModule.class})
 public interface RokuSellComponent {
 

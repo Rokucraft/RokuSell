@@ -2,6 +2,7 @@ package com.rokucraft.rokusell.di;
 
 import com.rokucraft.rokusell.RokuSellPlugin;
 import com.rokucraft.rokusell.command.OpenCommand;
+import com.rokucraft.rokusell.command.ReloadCommand;
 import com.rokucraft.rokusell.command.RokuSellCommand;
 import dagger.Binds;
 import dagger.Module;
@@ -26,4 +27,8 @@ abstract class CommandsModule {
     @Binds
     @IntoSet
     abstract RokuSellCommand bindOpenCommand(OpenCommand command);
+
+    @Binds
+    @IntoSet
+    abstract RokuSellCommand bindReloadCommand(ReloadCommand command);
 }
