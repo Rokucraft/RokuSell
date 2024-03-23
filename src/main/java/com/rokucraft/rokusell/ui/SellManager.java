@@ -32,6 +32,7 @@ public class SellManager {
 
     private SellInventory createSellInventory() {
         return new SellInventory(itemRepository, (player, amount) -> {
+            if (amount == 0) return;
             economy.depositPlayer(player, amount);
             player.sendMessage(text("Sold items for " + economy.format(amount), NamedTextColor.GREEN));
             player.playSound(sound(BLOCK_NOTE_BLOCK_CHIME, Sound.Source.PLAYER, 1, 1.5F));

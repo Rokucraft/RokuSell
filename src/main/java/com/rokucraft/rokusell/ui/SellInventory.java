@@ -9,6 +9,8 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiConsumer;
 
 import static net.kyori.adventure.text.Component.text;
@@ -32,16 +34,17 @@ public class SellInventory implements InventoryHolder {
 
     public void sellContents(Player player) {
         double totalWorth = 0;
+        List<ItemStack> unsoldItems = new ArrayList<>();
         for (ItemStack item : inventory) {
             if (item == null) continue;
             double worth = getWorth(item);
             if (worth == 0) {
-                returnItem(player, item);
+                unsoldItems.add(item);
                 continue;
             }
             totalWorth += worth;
         }
-        if (totalWorth == 0) return;
+        returnItem(player, unsoldItems.toArray(new ItemStack[0]));
         onSell.accept(player, totalWorth);
     }
 
@@ -53,7 +56,7 @@ public class SellInventory implements InventoryHolder {
                 .orElse(0.0) * itemStack.getAmount();
     }
 
-    private void returnItem(Player player, ItemStack item) {
+    private void returnItem(Player player, ItemStack... item) {
         player.getInventory()
                 .addItem(item)
                 .values()
