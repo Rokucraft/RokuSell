@@ -21,6 +21,7 @@ public record Item(
     }
 
     private boolean matchesName(ItemStack item) {
-        return this.name == null || this.name.equals(plainText().serialize(item.displayName()));
+        String displayName = plainText().serializeOrNull(item.getItemMeta().displayName());
+        return this.name == null || this.name.equals(displayName);
     }
 }
