@@ -24,7 +24,7 @@ public class SellInventory implements InventoryHolder {
     public SellInventory(ItemRepository itemRepository, BiConsumer<Player, Double> onSell) {
         this.itemRepository = itemRepository;
         this.onSell = onSell;
-        this.inventory = Bukkit.createInventory(this, 3 * 9, text("Sell your items here!"));
+        this.inventory = Bukkit.createInventory(this, 3 * 9, text("Sell your items"));
     }
 
     @Override
