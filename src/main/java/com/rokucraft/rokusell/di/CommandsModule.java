@@ -11,7 +11,7 @@ import dagger.multibindings.IntoSet;
 import org.bukkit.command.CommandSender;
 import org.incendo.cloud.CommandManager;
 import org.incendo.cloud.execution.ExecutionCoordinator;
-import org.incendo.cloud.paper.PaperCommandManager;
+import org.incendo.cloud.paper.LegacyPaperCommandManager;
 
 @Module
 abstract class CommandsModule {
@@ -19,7 +19,7 @@ abstract class CommandsModule {
     static CommandManager<CommandSender> provideCommandManager(
             RokuSellPlugin plugin
     ) {
-        var manager = PaperCommandManager.createNative(plugin, ExecutionCoordinator.simpleCoordinator());
+        var manager = LegacyPaperCommandManager.createNative(plugin, ExecutionCoordinator.simpleCoordinator());
         manager.registerBrigadier();
         return manager;
     }

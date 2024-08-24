@@ -1,7 +1,7 @@
 plugins {
     `java-library`
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
-    id("xyz.jpenilla.run-paper") version "2.2.3"
+    id("xyz.jpenilla.run-paper") version "2.3.1"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
@@ -19,10 +19,10 @@ dependencies {
     compileOnly("org.spongepowered:configurate-yaml:4.1.2")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
 
-    implementation("org.incendo:cloud-paper:2.0.0-beta.5")
+    implementation("org.incendo:cloud-paper:2.0.0-beta.9")
 
-    library("com.google.dagger:dagger:2.51")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.51")
+    library("com.google.dagger:dagger:2.52")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.52")
 }
 
 java {
