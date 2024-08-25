@@ -8,6 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class SellInventory implements InventoryHolder {
     public void sellContents(Player player) {
         double totalWorth = 0;
         List<ItemStack> unsoldItems = new ArrayList<>();
-        for (ItemStack item : inventory) {
+        for (@Nullable ItemStack item : inventory) {
             if (item == null) continue;
             double worth = getWorth(item);
             if (worth == 0) {

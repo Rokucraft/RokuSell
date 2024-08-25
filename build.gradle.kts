@@ -23,6 +23,7 @@ dependencies {
 
     library("com.google.dagger:dagger:2.52")
     annotationProcessor("com.google.dagger:dagger-compiler:2.52")
+    api("org.jspecify:jspecify:1.0.0")
 }
 
 java {

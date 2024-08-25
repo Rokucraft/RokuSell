@@ -1,6 +1,7 @@
 package com.rokucraft.rokusell.data;
 
 import com.rokucraft.rokusell.di.DataPath;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
@@ -26,7 +27,7 @@ public class ItemRepository {
         shopsPath = dataPath.resolve("shops");
     }
 
-    public Shop getShop(String string) {
+    public @Nullable Shop getShop(String string) {
         return shops.get(string);
     }
 
@@ -48,7 +49,7 @@ public class ItemRepository {
         }
     }
 
-    private Shop loadShop(Path path) {
+    private @Nullable Shop loadShop(Path path) {
         var loader = YamlConfigurationLoader.builder()
                 .path(path)
                 .build();

@@ -3,7 +3,6 @@ package com.rokucraft.rokusell.command;
 import com.rokucraft.rokusell.data.ItemRepository;
 import com.rokucraft.rokusell.data.Shop;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.incendo.cloud.context.CommandContext;
 import org.incendo.cloud.context.CommandInput;
 import org.incendo.cloud.parser.ArgumentParseResult;
@@ -31,10 +30,7 @@ public class ShopParser<C> implements ArgumentParser<C, Shop>, BlockingSuggestio
     }
 
     @Override
-    public @NonNull ArgumentParseResult<Shop> parse(
-            @NonNull CommandContext commandContext,
-            @NonNull CommandInput commandInput
-    ) {
+    public ArgumentParseResult<Shop> parse(CommandContext commandContext, CommandInput commandInput) {
         final String input = commandInput.peekString();
         Shop shop = shopRepository.getShop(input);
         if (shop == null) {
@@ -45,10 +41,7 @@ public class ShopParser<C> implements ArgumentParser<C, Shop>, BlockingSuggestio
     }
 
     @Override
-    public @NonNull Iterable<@NonNull String> stringSuggestions(
-            @NonNull CommandContext commandContext,
-            @NonNull CommandInput input
-    ) {
+    public Iterable<String> stringSuggestions(CommandContext commandContext, CommandInput input) {
         return shopRepository.getShops()
                 .stream()
                 .map(Shop::name)
