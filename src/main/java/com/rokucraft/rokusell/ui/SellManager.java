@@ -1,6 +1,6 @@
 package com.rokucraft.rokusell.ui;
 
-import com.rokucraft.rokusell.data.ItemRepository;
+import com.rokucraft.rokusell.data.Shop;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.milkbowl.vault.economy.Economy;
@@ -15,23 +15,20 @@ import static org.bukkit.Sound.BLOCK_NOTE_BLOCK_CHIME;
 public class SellManager {
 
     private final Economy economy;
-    private final ItemRepository itemRepository;
 
     @Inject
     public SellManager(
-            Economy economy,
-            ItemRepository itemRepository
+            Economy economy
     ) {
         this.economy = economy;
-        this.itemRepository = itemRepository;
     }
 
-    public void open(Player player) {
-        player.openInventory(createSellInventory().getInventory());
+    public void open(Player player, Shop shop) {
+        player.openInventory(createSellInventory(shop).getInventory());
     }
 
-    private SellInventory createSellInventory() {
-        return new SellInventory(itemRepository, (player, amount) -> {
+    private SellInventory createSellInventory(Shop shop) {
+        return new SellInventory(shop, (player, amount) -> {
             if (amount == 0) return;
             economy.depositPlayer(player, amount);
             player.sendMessage(text("Sold items for " + economy.format(amount), NamedTextColor.GREEN));

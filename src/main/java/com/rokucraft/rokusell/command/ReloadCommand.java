@@ -23,8 +23,8 @@ public class ReloadCommand extends RokuSellCommand {
         return builder.literal("reload")
                 .permission("rokusell.command.reload")
                 .handler(ctx -> {
-                    itemRepository.refresh();
-                    ctx.sender().sendMessage(text("Item configuration reloaded", NamedTextColor.GREEN));
+                    itemRepository.loadShops();
+                    ctx.sender().sendMessage(text("Shop configuration reloaded", NamedTextColor.GREEN));
                 });
     }
 }

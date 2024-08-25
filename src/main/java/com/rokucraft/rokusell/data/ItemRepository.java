@@ -10,43 +10,64 @@ import javax.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Singleton
 public class ItemRepository {
-    private final YamlConfigurationLoader loader;
     private final Logger logger;
-    private List<Item> items;
+    private final Path shopsPath;
+    private final Map<String, Shop> shops = new HashMap<>();
 
     @Inject
     public ItemRepository(@DataPath Path dataPath, Logger logger) {
         this.logger = logger;
-        Path itemPath = dataPath.resolve("items.yml");
-        if (Files.notExists(itemPath)) {
-            try {
-                Files.createDirectories(itemPath.getParent());
-                Files.createFile(itemPath);
-            } catch (IOException e) {
-                throw new RuntimeException("Couldn't create items.yml", e);
+        shopsPath = dataPath.resolve("shops");
+    }
+
+    public Shop getShop(String string) {
+        return shops.get(string);
+    }
+
+    public List<Shop> getShops() {
+        return List.copyOf(shops.values());
+    }
+
+    public void loadShops() {
+        shops.clear();
+        createShopsDir();
+        try (var stream = Files.newDirectoryStream(shopsPath, "*.{yml,yaml}")) {
+            for (Path path : stream) {
+                Shop shop = loadShop(path);
+                if (shop == null) continue;
+                shops.put(shop.name(), shop);
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        loader = YamlConfigurationLoader.builder()
-                .path(itemPath)
+    }
+
+    private Shop loadShop(Path path) {
+        var loader = YamlConfigurationLoader.builder()
+                .path(path)
                 .build();
-        refresh();
-    }
-
-    public List<Item> getItems() {
-        return this.items;
-    }
-
-    public void refresh() {
         try {
-            this.items = this.loader.load().getList(Item.class, new ArrayList<>());
-            logger.info("Loaded " + items.size() + " items.");
+            List<Item> items = loader.load().getList(Item.class, List.of());
+            String name = path.getFileName().toString().split("\\.")[0];
+            logger.info("Loaded shop {}", name);
+            return new Shop(name, items);
         } catch (ConfigurateException e) {
-            throw new RuntimeException("Failed to load items.", e);
+            logger.error("Unable to load shop file {}", path.getFileName(), e);
+            return null;
+        }
+    }
+
+    private void createShopsDir() {
+        try {
+            Files.createDirectories(shopsPath);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not create shops directory", e);
         }
     }
 }

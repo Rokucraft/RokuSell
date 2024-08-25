@@ -2,6 +2,7 @@ package com.rokucraft.rokusell.di;
 
 import com.rokucraft.rokusell.RokuSellPlugin;
 import com.rokucraft.rokusell.command.RokuSellCommand;
+import com.rokucraft.rokusell.data.ItemRepository;
 import com.rokucraft.rokusell.ui.InventoryUiModule;
 import dagger.BindsInstance;
 import dagger.Component;
@@ -20,6 +21,7 @@ public interface RokuSellComponent {
     Set<RokuSellCommand> commands();
 
     Set<Listener> listeners();
+    ItemRepository itemRepository();
 
     @Component.Builder
     interface Builder {

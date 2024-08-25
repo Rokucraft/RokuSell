@@ -1,7 +1,7 @@
 package com.rokucraft.rokusell.ui;
 
 import com.rokucraft.rokusell.data.Item;
-import com.rokucraft.rokusell.data.ItemRepository;
+import com.rokucraft.rokusell.data.Shop;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -18,11 +18,11 @@ import static net.kyori.adventure.text.Component.text;
 public class SellInventory implements InventoryHolder {
 
     private final Inventory inventory;
-    private final ItemRepository itemRepository;
+    private final Shop shop;
     private final BiConsumer<Player, Double> onSell;
 
-    public SellInventory(ItemRepository itemRepository, BiConsumer<Player, Double> onSell) {
-        this.itemRepository = itemRepository;
+    public SellInventory(Shop shop, BiConsumer<Player, Double> onSell) {
+        this.shop = shop;
         this.onSell = onSell;
         this.inventory = Bukkit.createInventory(this, 3 * 9, text("Sell your items"));
     }
@@ -49,7 +49,7 @@ public class SellInventory implements InventoryHolder {
     }
 
     private double getWorth(ItemStack itemStack) {
-        return itemRepository.getItems().stream()
+        return shop.items().stream()
                 .filter(i -> i.matches(itemStack))
                 .findFirst()
                 .map(Item::worth)
