@@ -2,6 +2,7 @@ package com.rokucraft.rokusell.ui;
 
 import com.rokucraft.rokusell.data.Item;
 import com.rokucraft.rokusell.data.Shop;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -58,9 +59,20 @@ public class SellInventory implements InventoryHolder {
     }
 
     private void returnItem(Player player, ItemStack... item) {
+        if (item.length == 0) return;
         player.getInventory()
                 .addItem(item)
                 .values()
                 .forEach(remaining -> player.getWorld().dropItem(player.getLocation(), remaining));
+        player.sendMessage(text()
+                .color(NamedTextColor.GRAY)
+                .append(text("["))
+                .append(text("!", NamedTextColor.RED))
+                .append(text("]"))
+                .appendSpace()
+                .append(text("I'm unable to accept some of your items."))
+                .appendNewline()
+                .append(text("I've returned them to your inventory."))
+        );
     }
 }
