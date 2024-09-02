@@ -48,7 +48,8 @@ tasks {
         archiveClassifier = ""
         listOf(
             "org.incendo.cloud",
-            "io.leangen.geantyref"
+            "io.leangen.geantyref",
+            "org.jspecify"
         ).forEach { relocate(it, "${rootProject.group}.${rootProject.name}.lib.$it") }
     }
 
