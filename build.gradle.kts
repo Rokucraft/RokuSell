@@ -17,13 +17,13 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.19.4-R0.1-SNAPSHOT")
     compileOnly("org.spongepowered:configurate-yaml:4.1.2")
-    compileOnly("com.github.MilkBowl:VaultAPI:1.7")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
 
     implementation("org.incendo:cloud-paper:2.0.1")
 
-    library("com.google.dagger:dagger:2.52")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.52")
-    api("org.jspecify:jspecify:1.0.0")
+    library("com.google.dagger:dagger:2.60.1")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.60.1")
+    api("org.jspecify:jspecify:1.0.1")
 }
 
 java {
@@ -57,7 +57,7 @@ tasks {
         minecraftVersion("1.19.4")
         downloadPlugins {
             github("MilkBowl", "Vault", "1.7.3", "Vault.jar")
-            modrinth("essentialsx", "2.20.1")
+            modrinth("essentialsx", "2.22.0")
         }
     }
 }
