@@ -19,7 +19,7 @@ dependencies {
     compileOnly("org.spongepowered:configurate-yaml:4.1.2")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
 
-    implementation("org.incendo:cloud-paper:2.0.0-beta.9")
+    implementation("org.incendo:cloud-paper:2.0.1")
 
     library("com.google.dagger:dagger:2.52")
     annotationProcessor("com.google.dagger:dagger-compiler:2.52")
